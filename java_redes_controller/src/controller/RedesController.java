@@ -22,7 +22,7 @@ public class RedesController {
 		if(os.contains("Windows 11")) {
 			leProc("ipconfig");
 		}else if(os.contains("Linux")) {
-			System.out.println("Linuxquison");
+			leProc("ifconfig");
 		}
 		
 	}
@@ -64,7 +64,7 @@ public class RedesController {
 					String[] linhaIp = linha.split(" ");
 					System.out.println(linhaIp[linhaIp.length-1]);
 				}
-				linha = buffer.readLine();
+				
 				
 				if(linha.contains(" = ") && linha.contains("ms")) {
 					String[] linhaPing = linha.split(" ");
@@ -73,6 +73,17 @@ public class RedesController {
 					System.out.println(bufferLinha);
 				}
 				
+				if(linha.contains("lo: ") || linha.contains("enp")) {
+					String[] vetRedeLinux = linha.split(" ");
+					System.out.println(vetRedeLinux[0]);
+				}
+				
+				if(linha.contains("inet ")) {
+					String[] vetIpLinux = linha.split(" ");
+					System.out.println(vetIpLinux[1]);
+				}
+				
+				linha = buffer.readLine();
 			}
 			buffer.close();
 			fluxo.close();
